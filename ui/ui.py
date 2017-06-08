@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'main.ui'
 #
-# Created: Thu Jun  8 01:15:15 2017
+# Created: Thu Jun  8 23:13:24 2017
 #      by: pyside-uic 0.2.15 running on PySide 1.2.4
 #
 # WARNING! All changes made in this file will be lost!
@@ -65,9 +65,9 @@ class Ui_Form(object):
         self.pushButton_4.setObjectName("pushButton_4")
         self.horizontalLayout_4.addWidget(self.pushButton_4)
         self.verticalLayout.addLayout(self.horizontalLayout_4)
-        self.textBrowser = QtGui.QTextBrowser(Form)
-        self.textBrowser.setObjectName("textBrowser")
-        self.verticalLayout.addWidget(self.textBrowser)
+        self.log_text_browser = QtGui.QTextBrowser(Form)
+        self.log_text_browser.setObjectName("log_text_browser")
+        self.verticalLayout.addWidget(self.log_text_browser)
         self.horizontalLayout_5 = QtGui.QHBoxLayout()
         self.horizontalLayout_5.setObjectName("horizontalLayout_5")
         self.label_5 = QtGui.QLabel(Form)
@@ -78,9 +78,9 @@ class Ui_Form(object):
         self.pushButton_6 = QtGui.QPushButton(Form)
         self.pushButton_6.setObjectName("pushButton_6")
         self.horizontalLayout_5.addWidget(self.pushButton_6)
-        self.pushButton_5 = QtGui.QPushButton(Form)
-        self.pushButton_5.setObjectName("pushButton_5")
-        self.horizontalLayout_5.addWidget(self.pushButton_5)
+        self.start_button = QtGui.QPushButton(Form)
+        self.start_button.setObjectName("start_button")
+        self.horizontalLayout_5.addWidget(self.start_button)
         self.verticalLayout.addLayout(self.horizontalLayout_5)
         self.horizontalLayout_6 = QtGui.QHBoxLayout()
         self.horizontalLayout_6.setObjectName("horizontalLayout_6")
@@ -108,6 +108,6 @@ class Ui_Form(object):
         self.pushButton_4.setText(QtGui.QApplication.translate("Form", "删除", None, QtGui.QApplication.UnicodeUTF8))
         self.label_5.setText(QtGui.QApplication.translate("Form", "  准备就绪", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_6.setText(QtGui.QApplication.translate("Form", "开始全部", None, QtGui.QApplication.UnicodeUTF8))
-        self.pushButton_5.setText(QtGui.QApplication.translate("Form", "开始", None, QtGui.QApplication.UnicodeUTF8))
+        self.start_button.setText(QtGui.QApplication.translate("Form", "开始", None, QtGui.QApplication.UnicodeUTF8))
         self.pushButton_7.setText(QtGui.QApplication.translate("Form", "中断", None, QtGui.QApplication.UnicodeUTF8))
 
