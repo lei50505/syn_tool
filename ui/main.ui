@@ -11,7 +11,10 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>SynTool</string>
+  </property>
+  <property name="layoutDirection">
+   <enum>Qt::LeftToRight</enum>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
@@ -24,10 +27,17 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit"/>
+      <widget class="QLineEdit" name="source_box">
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
+      </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton">
+      <widget class="QPushButton" name="source_button">
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
        <property name="text">
         <string>浏览</string>
        </property>
@@ -45,10 +55,17 @@
       </widget>
      </item>
      <item>
-      <widget class="QLineEdit" name="lineEdit_2"/>
+      <widget class="QLineEdit" name="target_box">
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
+      </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="target_button">
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
        <property name="text">
         <string>浏览</string>
        </property>
@@ -78,10 +95,17 @@
       </widget>
      </item>
      <item>
-      <widget class="QComboBox" name="comboBox"/>
+      <widget class="QComboBox" name="select_box">
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
+      </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_3">
+      <widget class="QPushButton" name="save_button">
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
        <property name="text">
         <string>保存</string>
        </property>
@@ -112,7 +136,10 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_4">
+      <widget class="QPushButton" name="delete_button">
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
        <property name="text">
         <string>删除</string>
        </property>
@@ -121,7 +148,7 @@
     </layout>
    </item>
    <item>
-    <widget class="QTextBrowser" name="log_text_browser"/>
+    <widget class="QTextBrowser" name="log_box"/>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -146,7 +173,10 @@
       </spacer>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_6">
+      <widget class="QPushButton" name="start_all_button">
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
        <property name="text">
         <string>开始全部</string>
        </property>
@@ -154,6 +184,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="start_button">
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
        <property name="text">
         <string>开始</string>
        </property>
@@ -164,14 +197,20 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_6">
      <item>
-      <widget class="QProgressBar" name="progressBar">
+      <widget class="QProgressBar" name="proc_box">
        <property name="value">
         <number>24</number>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_7">
+      <widget class="QPushButton" name="abort_button">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::ClickFocus</enum>
+       </property>
        <property name="text">
         <string>中断</string>
        </property>
