@@ -12,32 +12,70 @@ from ui.ui import Ui_Form
 from PySide.QtGui import QApplication, QWidget, QFileDialog
 from PySide.QtCore import QThread, Signal, Slot
 
-ABORT = False
+
+def singleton(cls, *args, **kw):
+    '''doc'''
+    instance = {}
+    def _singleton():
+        if cls not in instance:
+            instance[cls] = cls(*args, **kw)
+        return instance[cls]
+    return _singleton
+
+ABORT = "abort"
+
+@singleton
+class Data():
+    '''doc'''
+    def __init__(self):
+        self.data = {}
+    def set(self, key, val):
+        '''doc'''
+        self.data[key] = val
+    def get(self, key):
+        '''doc'''
+        return self.data[key]
+
+@singleton
+class Error():
+    '''doc'''
+    def __init__(self):
+        self.errors = []
+    def add(self, val):
+        '''doc'''
+        self.errors.append(val)
+    def get(self):
+        '''doc'''
+        return self.errors
 
 class StartThread(QThread):
     '''doc'''
-
+    #pylint:disable=no-member
     end_signal = Signal()
     proc_signal = Signal(int)
+    log_signal = Signal(str)
     def __init__(self):
         super(StartThread, self).__init__(None)
     def run(self):
         '''doc'''
-        global ABORT # pylint:disable=global-statement
-        ABORT = False
-        print("doing")
+
+        data = Data()
+        data.set(ABORT, False)
+
+        self.log_signal.emit("doing")
         for icon in range(1, 11):
 
             time.sleep(1)
-            self.proc_signal.emit(icon * 10) #pylint:disable=no-member
+            self.proc_signal.emit(icon * 10)
 
-            if ABORT:
-                print("abort")
-                self.end_signal.emit() #pylint:disable=no-member
+            if data.get(ABORT):
+
+                self.log_signal.emit("abort")
+                self.end_signal.emit()
                 return
 
-        print("done")
-        self.end_signal.emit() #pylint:disable=no-member
+        self.log_signal.emit("done")
+        self.end_signal.emit()
 
 
 class SynTool(QWidget, Ui_Form):
@@ -45,26 +83,29 @@ class SynTool(QWidget, Ui_Form):
     def __init__(self):
         super(SynTool, self).__init__()
         self.setupUi(self)
-
+        #pylint:disable=no-member
         # start_button
-        self.start_button.clicked.connect(self.start_button_clicked_slot) #pylint:disable=no-member
-
+        self.start_button.clicked.connect(self.start_button_clicked_slot)
         self.start_thread = StartThread()
-        self.start_thread.end_signal.connect(self.start_thread_end_slot) #pylint:disable=no-member
-        self.start_thread.proc_signal.connect(self.start_thread_proc_slot) #pylint:disable=no-member
-
+        self.start_thread.end_signal.connect(self.start_thread_end_slot)
+        self.start_thread.proc_signal.connect(self.start_thread_proc_slot)
+        self.start_thread.log_signal.connect(self.start_thread_log_slot)
         self.proc_box.setMinimum(0)
         self.proc_box.setMaximum(100)
         self.proc_box.setValue(0)
 
         # source_button
-        self.source_button.clicked.connect(self.source_button_clicked_slot) #pylint:disable=no-member
+        self.source_button.clicked.connect(self.source_button_clicked_slot)
 
         # target_button
-        self.target_button.clicked.connect(self.target_button_clicked_slot) #pylint:disable=no-member
+        self.target_button.clicked.connect(self.target_button_clicked_slot)
 
-        # target_button
-        self.abort_button.clicked.connect(self.abort_button_clicked_slot) #pylint:disable=no-member
+        # abort_button
+        self.abort_button.clicked.connect(self.abort_button_clicked_slot)
+
+        # delete_button
+        self.delete_button.clicked.connect(self.delete_button_clicked_slot)
+
 
     @Slot()
     def start_button_clicked_slot(self):
@@ -99,6 +140,10 @@ class SynTool(QWidget, Ui_Form):
     def start_thread_proc_slot(self, value):
         '''doc'''
         self.proc_box.setValue(value)
+    @Slot(str)
+    def start_thread_log_slot(self, value):
+        '''doc'''
+        self.log_box.append(value)
 
     @Slot()
     def source_button_clicked_slot(self):
@@ -121,9 +166,17 @@ class SynTool(QWidget, Ui_Form):
     @Slot()
     def abort_button_clicked_slot(self):
         '''doc'''
-        global ABORT # pylint:disable=global-statement
+        data = Data()
+
         self.abort_button.setDisabled(True)
-        ABORT = True
+        data.set(ABORT, True)
+
+    @Slot()
+    def delete_button_clicked_slot(self):
+        '''doc'''
+        self.delete_button.setDisabled(True)
+
+        self.delete_button.setDisabled(False)
 
 def main():
     '''main'''
