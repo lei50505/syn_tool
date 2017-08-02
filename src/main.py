@@ -1,52 +1,22 @@
 #! /usr/bin/env python
 # -*- coding: utf-8 -*-
 
-'''start_ui'''
+'''doc'''
 
 import os
 import sys
 import time
 
 from ui.ui import Ui_Form
+from src.util import Data
 
 from PySide.QtGui import QApplication, QWidget, QFileDialog
 from PySide.QtCore import QThread, Signal, Slot
 
 
-def singleton(cls, *args, **kw):
-    '''doc'''
-    instance = {}
-    def _singleton():
-        if cls not in instance:
-            instance[cls] = cls(*args, **kw)
-        return instance[cls]
-    return _singleton
-
 ABORT = "abort"
 
-@singleton
-class Data():
-    '''doc'''
-    def __init__(self):
-        self.data = {}
-    def set(self, key, val):
-        '''doc'''
-        self.data[key] = val
-    def get(self, key):
-        '''doc'''
-        return self.data[key]
 
-@singleton
-class Error():
-    '''doc'''
-    def __init__(self):
-        self.errors = []
-    def add(self, val):
-        '''doc'''
-        self.errors.append(val)
-    def get(self):
-        '''doc'''
-        return self.errors
 
 class StartThread(QThread):
     '''doc'''
@@ -178,6 +148,8 @@ class SynTool(QWidget, Ui_Form):
 
         self.delete_button.setDisabled(False)
 
+
+
 def main():
     '''main'''
     app = QApplication(sys.argv)
@@ -185,6 +157,3 @@ def main():
     syn_tool.show()
 
     sys.exit(app.exec_())
-
-if __name__ == "__main__":
-    main()
