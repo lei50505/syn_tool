@@ -10,7 +10,7 @@ import time
 from ui.ui import Ui_Form
 from src.util import Data
 
-from PySide.QtGui import QApplication, QWidget, QFileDialog
+from PySide.QtGui import QApplication, QWidget, QFileDialog, QIcon
 from PySide.QtCore import QThread, Signal, Slot
 
 
@@ -53,6 +53,8 @@ class SynTool(QWidget, Ui_Form):
     def __init__(self):
         super(SynTool, self).__init__()
         self.setupUi(self)
+        icon = QIcon("ui/main.png")
+        self.setWindowIcon(icon)
         #pylint:disable=no-member
         # start_button
         self.start_button.clicked.connect(self.start_button_clicked_slot)
